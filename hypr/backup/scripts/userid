@@ -1,0 +1,2 @@
+echo "\$uid = $(id -u)" > ~/.config/hypr/modules/user_info.conf
+

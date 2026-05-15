@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SIG=$(ls "$XDG_RUNTIME_DIR/hypr/" | head -1)
+SOCK="$XDG_RUNTIME_DIR/hypr/$SIG/.socket2.sock"
+
+socat -u "UNIX-CONNECT:$SOCK" STDOUT | while read -r line; do
+    case $line in
+        fullscreen\>\>*)
+            if hyprctl clients -j 2>/dev/null | grep -qE '"fullscreen":\s*[1-9]'; then
+                pkill -STOP awww-daemon
+            else
+                pkill -CONT awww-daemon
+            fi
+            ;;
+    esac
+done
