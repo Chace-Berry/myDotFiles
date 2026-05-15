@@ -1,0 +1,81 @@
+/**
+ * altd clipboard picker — onedark theme
+ * single column, compact, for cliphist
+ **/
+
+@import "~/.config/rofi/colors/onedark.rasi"
+
+* {
+    background:     #282C34CC;
+    background-alt: #393E48CC;
+    foreground:     #979EABFF;
+    selected:       #61AFEFFF;
+    active:         #98C379FF;
+    urgent:         #E06C75FF;
+    font:           "Maple Mono NR CN font 12";
+}
+
+window {
+    transparency:     "real";
+    location:         center;
+    anchor:           center;
+    width:            600px;
+    border:           0px solid;
+    border-radius:    12px;
+    background-color: @background;
+}
+
+mainbox {
+    spacing:          8px;
+    padding:          16px;
+    background-color: transparent;
+    children:         [ "inputbar", "listview" ];
+}
+
+inputbar {
+    spacing:          8px;
+    padding:          8px 12px;
+    border-radius:    8px;
+    background-color: @background-alt;
+    text-color:       @foreground;
+    children:         [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @selected;
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @foreground;
+    placeholder:      "Search clipboard...";
+    placeholder-color: #555b66FF;
+}
+
+listview {
+    columns:          1;
+    lines:            8;
+    scrollbar:        false;
+    spacing:          4px;
+    background-color: transparent;
+}
+
+element {
+    padding:          6px 12px;
+    border-radius:    8px;
+    background-color: transparent;
+    text-color:       @foreground;
+    cursor:           pointer;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color:       #282C34FF;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
