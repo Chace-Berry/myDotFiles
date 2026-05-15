@@ -1,0 +1,15 @@
+#!/bin/bash
+# Gracefully close all Hyprland clients, then exit the session
+ADDRS=$(hyprctl clients -j 2>/dev/null | jq -r '.[].address // empty')
+for addr in $ADDRS; do
+    hyprctl dispatch closewindow "address:$addr" 2>/dev/null
+done
+# Give apps a moment to close cleanly
+sleep 0.8
+# Force-kill any stragglers (skip our own shell)
+PIDS=$(hyprctl clients -j 2>/dev/null | jq -r '.[].pid // empty')
+for pid in $PIDS; do
+    kill -SIGTERM "$pid" 2>/dev/null
+done
+sleep 0.3
+hyprctl dispatch exit ""
